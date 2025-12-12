@@ -1,20 +1,23 @@
 :root {
-  --primary: #FF4757;
-  --secondary: #2ED573;
-  --dark: #1e272e;
-  --darker: #0d1117;
+  --primary: #e63946;
+  /* Santa Red */
+  --secondary: #2a9d8f;
+  /* Pine Green */
+  --dark: #2d3436;
   --light: #f1f2f6;
-  --text: #ffffff;
-  --glass: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.2);
+  --text: #2d3436;
+  --glass: rgba(255, 255, 255, 0.85);
+  /* Frosted Glass */
+  --glass-border: rgba(255, 255, 255, 0.5);
   --font-stack: 'Inter', system-ui, -apple-system, sans-serif;
+  --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
 }
 
 body {
   margin: 0;
   padding: 0;
   font-family: var(--font-stack);
-  background: radial-gradient(circle at top right, #2f3542, #0d1117);
+  background: radial-gradient(circle at top, #ffffff, #dfe6e9);
   background-attachment: fixed;
   color: var(--text);
   min-height: 100vh;
@@ -22,6 +25,33 @@ body {
   justify-content: center;
   align-items: center;
   overflow-x: hidden;
+  position: relative;
+}
+
+/* Snowfall Animation */
+.snowflake {
+  position: fixed;
+  top: -10px;
+  color: #a8e6cf;
+  font-size: 1em;
+  font-family: Arial;
+  text-shadow: 0 0 1px #000;
+  user-select: none;
+  z-index: 0;
+  pointer-events: none;
+  animation-name: snowfall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes snowfall {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(100vh);
+  }
 }
 
 .container {
@@ -29,31 +59,35 @@ body {
   max-width: 500px;
   padding: 20px;
   text-align: center;
+  position: relative;
+  z-index: 10;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: 800;
   letter-spacing: -0.5px;
   margin-bottom: 20px;
 }
 
 h1 {
-  background: linear-gradient(135deg, #FF6B81, #FF4757);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: 2.5rem;
+  color: var(--primary);
+  font-size: 3rem;
   margin-bottom: 30px;
-  text-shadow: 0 10px 30px rgba(255, 71, 87, 0.3);
+  text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(0, 0, 0, 0.1);
+  font-family: 'Mountains of Christmas', cursive, var(--font-stack);
+  /* Fallback */
 }
 
 .card {
   background: var(--glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--glass-border);
   border-radius: 24px;
   padding: 40px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  box-shadow: var(--shadow);
   transition: transform 0.3s ease;
 }
 
@@ -66,19 +100,20 @@ input {
   padding: 15px;
   margin-bottom: 15px;
   border-radius: 12px;
-  border: 1px solid var(--glass-border);
-  background: rgba(0, 0, 0, 0.2);
-  color: white;
+  border: 2px solid transparent;
+  background: #fff;
+  color: var(--text);
   font-size: 1rem;
   outline: none;
-  box-sizing: border-box; /* Fix padding increasing width */
+  box-sizing: border-box;
   transition: all 0.3s;
   text-align: center;
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 input:focus {
-  border-color: var(--primary);
-  background: rgba(0, 0, 0, 0.4);
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 4px rgba(42, 157, 143, 0.2);
 }
 
 button {
@@ -95,46 +130,59 @@ button {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #FF6B81, #FF4757);
+  background: linear-gradient(135deg, var(--primary), #d63031);
   color: white;
-  box-shadow: 0 10px 20px rgba(255, 71, 87, 0.3);
+  box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 15px 30px rgba(255, 71, 87, 0.4);
+  box-shadow: 0 15px 30px rgba(230, 57, 70, 0.4);
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+  background: white;
+  color: var(--secondary);
+  border: 2px solid var(--secondary);
   margin-top: 10px;
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--secondary);
+  color: white;
 }
 
 .divider {
   margin: 20px 0;
   position: relative;
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: #b2bec3;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
 
 .error {
-  color: #ff6b6b;
+  color: var(--primary);
   margin-top: 10px;
+  font-weight: bold;
   font-size: 0.9rem;
   animation: shake 0.5s;
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  75% {
+    transform: translateX(5px);
+  }
 }
 
 /* List Styling */
@@ -146,79 +194,176 @@ ul {
 
 li {
   padding: 12px;
-  background: rgba(255,255,255,0.05);
+  background: white;
   margin-bottom: 8px;
   border-radius: 8px;
   display: flex;
   justify-content: space-between;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  color: var(--text);
 }
 
 li.me {
-  border: 1px solid var(--primary);
-  background: rgba(255, 71, 87, 0.1);
-}
-
-/* Reveal Page */
-.reveal-card {
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.btn-reveal {
-  background: var(--secondary);
-  color: #000;
-  box-shadow: 0 10px 20px rgba(46, 213, 115, 0.3);
-}
-
-.revealed-content {
-  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.recipient-name {
-  font-size: 2.5rem;
-  color: var(--secondary);
-  margin: 0;
-}
-
-.animation-party {
-  font-size: 4rem;
-  margin-top: 20px;
-  animation: spin 3s infinite linear;
-}
-
-@keyframes popIn {
-  from { opacity: 0; transform: scale(0.5); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  border: 2px solid var(--secondary);
+  background: rgba(42, 157, 143, 0.1);
+  font-weight: bold;
 }
 
 .highlight {
   color: var(--primary);
-  background: rgba(0,0,0,0.2);
+  background: rgba(230, 57, 70, 0.1);
   padding: 5px 10px;
   border-radius: 5px;
   letter-spacing: 2px;
+  border: 1px dashed var(--primary);
 }
 
 .link-style {
-    background: none;
-    text-decoration: underline;
-    text-transform: none;
-    letter-spacing: normal;
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.6);
-    margin-top: 20px;
-    width: auto;
-    display: inline-block;
+  background: none;
+  text-decoration: underline;
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 0.9rem;
+  color: var(--text);
+  margin-top: 20px;
+  width: auto;
+  display: inline-block;
+  border: none;
 }
+
 .link-style:hover {
-    color: white;
-    background: none;
+  color: var(--primary);
+  background: none;
+}
+
+/* Gift Box CSS */
+.gift-container {
+  perspective: 1000px;
+  width: 200px;
+  height: 200px;
+  margin: 50px auto;
+  cursor: pointer;
+}
+
+.gift-box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+
+.gift-box.open {
+  transform: rotateX(10deg) rotateY(10deg);
+}
+
+.gift-box div {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: var(--primary);
+  border: 2px solid #bd2c3a;
+  box-sizing: border-box;
+}
+
+/* Box Faces */
+.box-front {
+  transform: translateZ(100px);
+}
+
+.box-back {
+  transform: rotateY(180deg) translateZ(100px);
+}
+
+.box-left {
+  transform: rotateY(-90deg) translateZ(100px);
+}
+
+.box-right {
+  transform: rotateY(90deg) translateZ(100px);
+}
+
+.box-bottom {
+  transform: rotateX(-90deg) translateZ(100px);
+  background: #a32230 !important;
+}
+
+/* Lid */
+.lid {
+  position: absolute;
+  width: 210px;
+  height: 50px;
+  background: var(--primary);
+  top: -50px;
+  left: -5px;
+  transform-style: preserve-3d;
+  transform-origin: bottom;
+  transition: transform 0.5s ease-in-out;
+  border: 2px solid #bd2c3a;
+  transform: translateZ(100px);
+}
+
+.lid-top {
+  position: absolute;
+  width: 210px;
+  height: 210px;
+  background: var(--primary);
+  transform: rotateX(90deg) translateZ(105px) translateY(105px);
+  /* Adjusting lid top placement can be tricky manually, simplified for MVP */
+  top: -210px;
+}
+
+/* Decoration (Ribbon) */
+.ribbon-vertical {
+  position: absolute;
+  width: 40px;
+  height: 100%;
+  background: var(--secondary);
+  left: 80px;
+}
+
+.ribbon-horizontal {
+  position: absolute;
+  width: 100%;
+  height: 40px;
+  background: var(--secondary);
+  top: 80px;
+}
+
+/* Animation State */
+.gift-container.open .lid {
+  transform: rotateX(110deg) translateZ(100px);
+}
+
+.gift-container:hover .gift-box {
+  transform: rotateY(10deg) rotateX(5deg);
+}
+
+/* Content inside the box */
+.box-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateZ(80px);
+  /* Slightly lower than top to be hidden */
+  text-align: center;
+  width: 150px;
+  opacity: 0;
+  transition: opacity 0.5s 0.5s;
+  pointer-events: none;
+}
+
+.gift-container.open .box-content {
+  opacity: 1;
+  transform: translate(-50%, -150%) translateZ(100px);
+  /* Pop out */
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.recipient-name {
+  color: var(--primary);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }

@@ -4,10 +4,12 @@ import { SocketProvider } from './context/SocketContext';
 import Home from './pages/Home';
 import Lobby from './pages/Lobby';
 import Reveal from './pages/Reveal';
+import Snowfall from './components/Snowfall';
 
 function App() {
   return (
     <SocketProvider>
+      <Snowfall />
       <Router>
         <div className="container">
           <Routes>
